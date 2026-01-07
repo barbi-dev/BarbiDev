@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { color-scheme: dark; }
+html{
+  scroll-behavior: smooth;
+}
+
+body { @apply bg-gradient-to-b from-[#0b0b2a] via-[#120e3b] to-[#0b0b2a] text-zinc-100; }
+.container { @apply max-w-7xl px-5 mx-auto sm:px-8; }
+.glass { @apply bg-white/5 backdrop-blur-xl border border-white/20; }
+html, body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";  margin: 0;padding: 0;width: 100%;background-color: #05030a; 
+}
