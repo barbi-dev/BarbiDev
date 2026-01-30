@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Barbi-Dev | Movimiento Browniano 2D</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <div class="wrap">
+        <header class="header">
+        <div class="hLeft">
+            <div class="kicker">BARBIDEV · HANDS ON</div>
+            <h1>Movimiento browniano 2D</h1>
+            <p class="sub">
+            Random walk con traza acumulativa de partícula fluorescente.
+            </p>
+        </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel canvasPanel">
+        <div class="canvasTop">
+              <div class="canvasActions" aria-label="Simulation controls">
+                <button id="btnRun" class="act primary" title="Run">▶</button>
+                <button id="btnPause" class="act" title="Pause">⏸</button>
+                <button id="btnReset" class="act warn" title="Reset">↺</button>
+                <button id="btnNew" class="act" title="New path">✦</button>
+                <button id="btnSnap" class="act ghost" title="Download PNG">⬇</button>
+              </div>
+        </div>
+        <div class="canvasWrap">
+          <canvas id="cnv"></canvas>
+        </div>
+
+        <div class="mini">
+          Ajusta <b>Sigma</b> para cambiar dispersión y <b>Speed</b> para el ritmo.
+        </div>
+      </section>
+
+      <section class="panel controls">
+        <h2>Parámetros</h2>
+
+        <div class="ctl">
+          <label for="steps">Steps <span id="vSteps" class="val"></span></label>
+          <input id="steps" type="range" min="100" max="20000" value="10000" step="100" />
+        </div>
+
+        <div class="ctl">
+          <label for="steps">Sigma (tamaño del paso) <span id="vSigma" class="val"></span></label>
+          <input id="sigma" type="range" min="0.2" max="3.0" value="1.2" step="0.1" />
+        </div>
+
+        <div class="ctl">
+          <label for="steps">Tail (longitud) <span id="vTail" class="val"></span></label>
+          <input id="tail" type="range" min="0" max="8000" value="400" step="10" />
+        </div>
+
+        <div class="ctl">
+          <label for="steps">Speed (pasos/frame) <span id="vSpeed" class="val"></span></label>
+          <input id="speed" type="range" min="1" max="50" value="6" step="1" />
+        </div>
+
+        <div class="ctl">
+          <label for="steps">Glow <span id="vGlow" class="val"></span></label>
+          <input id="glow" type="range" min="0" max="100" value="50" step="1" />
+        </div>
+
+        <div class="ctl">
+          <label for="steps">Seed <span id="vSeed" class="val"></span></label>
+          <input id="seed" type="number" min="0" max="999" value="777" />
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>Estilo</h2>
+
+        <div class="ctl">
+          <label for="steps">Paleta</label>
+          <select id="theme">
+            <option value="cyan-magenta" selected>Cyan to Magenta</option>
+            <option value="cyan-purple">Cyan to Purple</option>
+            <option value="cyan-white">Cyan to White</option>
+          </select>
+        </div>
+
+        <div class="ctl row">
+          <label class="chk">
+            <input id="accumulate" type="checkbox" checked />
+            <span>Acumular historia</span>
+          </label>
+
+          <label class="chk">
+            <input id="showAxes" type="checkbox" />
+            <span>Ejes</span>
+          </label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="micro">
+          <b>Qué controla cada parámetro</b><br/>
+          <span>Steps:</span> duración/longitud del camino.<br/>
+          <span>Sigma:</span> dispersión (pasos más grandes = más “salto”).<br/>
+          <span>Tail:</span> “cometa” brillante (últimos puntos).<br/>
+          <span>Speed:</span> ritmo visual (pasos por frame).<br/>
+          <span>Glow:</span> intensidad neón.
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
