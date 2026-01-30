@@ -59,7 +59,7 @@ const copy = {
     faq: [
       {
         q: "¿Haces la tesis por mí?",
-        a: "No. Te asesoro y te enseño a ejecutar e interpretar, para que puedas justificarlo y defenderlo ante tu tribunal.",
+        a: "Te asesoro y te enseño a ejecutar e interpretar, para que puedas justificarlo y defenderlo ante tu tribunal.",
       },
       { q: "¿Qué necesito para iniciar?", a: "Tu base de datos, tu pregunta/objetivo y tu fecha límite." },
       { q: "¿Trabajas con urgencias?", a: "Sí, según disponibilidad. Te digo tiempos reales antes de empezar." },
@@ -117,7 +117,7 @@ const copy = {
     faq: [
       {
         q: "Do you do the thesis for me?",
-        a: "No. I guide and teach you to execute and interpret, so you can justify and defend it.",
+        a: "I guide and teach you to execute and interpret, so you can justify and defend it.",
       },
       { q: "What do you need to start?", a: "Your dataset, research goal, and deadline." },
       { q: "Do you handle urgent cases?", a: "Yes, depending on availability. I confirm realistic timing upfront." },
@@ -129,13 +129,31 @@ const copy = {
 } satisfies Record<Lang, any>;
 
 function buildWhatsAppLink(message: string) {
-  // ✅ Cambia a tu número en formato internacional, sin + y sin espacios. Ej: Ecuador 5939xxxxxxxx
   const phone = "593987292609";
   const text = encodeURIComponent(message);
   return `https://wa.me/${phone}?text=${text}`;
 }
 
 export default function Landing() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 920) setMenuOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+
   const [lang, setLang] = useState<Lang>("es");
   const t = copy[lang];
 
@@ -163,13 +181,11 @@ export default function Landing() {
     return buildWhatsAppLink(msg);
   }, [lang]);
   const headerRef = useRef<HTMLElement | null>(null);
-
-useEffect(() => {
-  const header = headerRef.current;
-  if (!header) return;
-
-  const onScroll = () => {
-    header.classList.toggle(styles.headerScrolled, window.scrollY > 8);
+  useEffect(() => {
+    const header = headerRef.current;
+      if (!header) return;
+      const onScroll = () => {
+        header.classList.toggle(styles.headerScrolled, window.scrollY > 8);
   };
 
   onScroll();
@@ -215,24 +231,55 @@ useEffect(() => {
             <a className={styles.brandName} href="#top">BarbiDev</a>
           </div>
 
+          {/* Desktop links */}
           <div className={styles.navLinks}>
-            <a href="#services">{t.nav.services}</a>
-            <a href="#work">{t.nav.work}</a>
+            <a href="#services1">{t.nav.services}</a>
+            <a href="/projects" rel="noopener noreferrer">{t.nav.work}</a>
             <a href="#store">{t.nav.store}</a>
             <a href="#about">{t.nav.about}</a>
             <a href="#contact">{t.nav.contact}</a>
           </div>
 
-          <button
+          {/* Right actions (lang + burger) */}
+          <div className={styles.navRight}>
+            <button
               className={styles.langToggle}
               onClick={() => setLang((p) => (p === "es" ? "en" : "es"))}
               aria-label="Toggle language"
             >
-              {lang === "es" ? "ES" : "EN"} 
+              {lang === "es" ? "ES" : "EN"}
             </button>
+
+            <button
+              className={styles.burger}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <span className={styles.burgerLines} />
+            </button>
+          </div>
         </nav>
-        
+
+        {/* Overlay click-to-close */}
+        {menuOpen && (
+          <button
+            className={styles.menuOverlay}
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
+
+        {/* Mobile dropdown */}
+        <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
+          <a href="#services1" onClick={() => setMenuOpen(false)}>{t.nav.services}</a>
+          <a href="/projects" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
+          <a href="#store" onClick={() => setMenuOpen(false)}>{t.nav.store}</a>
+          <a href="#about" onClick={() => setMenuOpen(false)}>{t.nav.about}</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>{t.nav.contact}</a>
+        </div>
       </header>
+
 
       {/* Hero */}
       <main className={styles.main}>
@@ -280,7 +327,7 @@ useEffect(() => {
         </section>
 
         {/* Work routes */}
-        <section className={`${styles.section} ${styles.anchor}`} id="work">
+        <section className={`${styles.section} ${styles.anchor}`} id="services1">
           <div className={styles.sectionHead}>
             <h2 className={styles.h2}>{t.workTitle}</h2>
             <p className={styles.lead}>{t.workIntro}</p>
