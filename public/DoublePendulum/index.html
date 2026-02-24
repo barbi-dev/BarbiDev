@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pendulo Doble|Sistema Caótico</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+    <div class="brand">
+      <div class="dot"></div>
+      <div class="brandText">
+        <div class="kicker">BARBIDEV · HANDS ON</div>
+        <h1>Pendulo Doble - Sistema Caótico</h1>
+        <p>Divergencia en trayectorias de dos péndulos idénticos, con una pequeña variación en el ángulo inicial.</p>
+      </div>
+    </div>
+
+    <div class="topActions">
+      <a class="btn btnGhost" href="/projects">Volver</a>
+      <a class="btn btnGhost" href="https://github.com/barbi-dev" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card stage">
+      <div class="toolbar">
+        <button id="btnPlay" class="btn btnAccent" aria-label="Play/Pause">▶⏸</button>
+        <button id="btnReset" class="btn btnGhost" aria-label="Reset">↺</button>
+        <button id="btnShuffle" class="btn btnGhost" aria-label="New seed">✶</button>
+
+        <div class="pill">
+          <span class="pillLabel">MODE</span>
+          <select id="mode" class="select">
+            <option value="overlay">Overlay</option>
+            <option value="split">Split</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="canvasWrap">
+        <canvas id="cv"></canvas>
+      </div>
+
+      <div class="hint">
+        Tip: baja <b>ε</b> para que diverja más lento. Sube <b>Tail</b> y <b>Glow</b> para más “neón”.
+      </div>
+    </section>
+
+    <aside class="card panel">
+      <h2>Parámetros</h2>
+
+      <div class="grid">
+        <div class="ctrl">
+          <label>ε (perturbación)</label>
+          <div class="row">
+            <input id="eps" type="range" min="0" max="0.5" step="0.001" value="0.001" />
+            <span class="val" id="epsVal"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>θ1 (deg)</label>
+          <div class="row">
+            <input id="th1" type="range" min="-180" max="180" step="1" value="117" />
+            <span class="val" id="th1Val"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>θ2 (deg)</label>
+          <div class="row">
+            <input id="th2" type="range" min="-180" max="180" step="1" value="-17" />
+            <span class="val" id="th2Val"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>L1</label>
+          <div class="row">
+            <input id="L1" type="range" min="0.4" max="1.6" step="0.01" value="1.00" />
+            <span class="val" id="L1Val"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>L2</label>
+          <div class="row">
+            <input id="L2" type="range" min="0.4" max="1.6" step="0.01" value="0.80" />
+            <span class="val" id="L2Val"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>g</label>
+          <div class="row">
+            <input id="g" type="range" min="1" max="20" step="0.01" value="9.81" />
+            <span class="val" id="gVal"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>Speed (steps/frame)</label>
+          <div class="row">
+            <input id="speed" type="range" min="1" max="20" step="1" value="6" />
+            <span class="val" id="speedVal"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>Tail</label>
+          <div class="row">
+            <input id="tail" type="range" min="0" max="1200" step="10" value="400" />
+            <span class="val" id="tailVal"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>Glow</label>
+          <div class="row">
+            <input id="glow" type="range" min="0" max="100" step="1" value="50" />
+            <span class="val" id="glowVal"></span>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>Seed</label>
+          <div class="row">
+            <input id="seed" class="input" type="number" min="0" step="1" value="777" />
+            <button id="btnSeed" class="btn btnGhost" type="button">Apply</button>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label>Paleta</label>
+          <div class="row">
+            <select id="palette" class="select">
+              <option value="magenta">Magenta (CHAOS)</option>
+              <option value="cyanmag">Cyan → Magenta</option>
+              <option value="violet">Violet</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label class="row rowTight">
+            <input id="showArms" type="checkbox" checked />
+            <span>Mostrar brazos</span>
+          </label>
+        </div>
+      </div>
+      </div>
+    </aside>
+  </main>
+
+  
+  </div>
+  <script src="./app.js"></script>
+
+</body>
+</html>
