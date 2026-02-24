@@ -426,9 +426,8 @@ useEffect(() => {
           </div>
         </section>
         <section className={styles.section}>
-            <SocialIcons /> 
-                 
-          </section>
+            <SocialIcons />
+        </section>
       </main>
       {modal && (
         <div className={styles.modalOverlay} onClick={() => setModal(null)}>

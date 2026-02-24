@@ -1,4 +1,5 @@
 import Head from "next/head";
+import SocialIcons from "../components/SocialIcons";
 
 type SimItem = {
   slug: string;
@@ -20,6 +21,16 @@ const SIMS: SimItem[] = [
     preview: "/visualizer/BrownianMotion.png",
     previewHover: "/visualizer/BrownianMotionTail.gif",
     tags: ["Ciencia con Huella","Física", "Estocástico"],
+
+  },
+  {
+    slug: "DoublePendulum",
+    title: "Péndulo Doble",
+    subtitle: "Divergencia en trayectorias de dos péndulos",
+    href: "/DoublePendulum/index.html",
+    preview: "/visualizer/double_pendulum.png",  
+    previewHover: "/visualizer/two_pendulum_.gif",
+    tags: ["Caos", "Física", "Simulación"],
     status: "new",
   },
   // En el futuro: solo agregas aquí más simulaciones
@@ -107,6 +118,14 @@ export default function Projects() {
           </div>
         </section>
 
+        <section className="section1">
+          <SocialIcons />
+        </section>
+
+        <footer className="footer">
+        <span>© BarbiDev · Estadística & Python · Ecuador / Online</span>
+        </footer>
+
         <style jsx>{`
           .page { min-height: 100vh; }
           .bg {
@@ -123,6 +142,8 @@ export default function Projects() {
             margin: 0 auto;
             padding: 30px 40px 60px;
           }
+          .section1{
+            padding:54px 0 0; }
           .top {
             display: flex;
             justify-content: space-between;
@@ -142,6 +163,13 @@ export default function Projects() {
             line-height: 1.08;
             color: rgba(255,255,255,0.95);
           }
+          .footer{
+            padding:18px 16px 28px;
+            text-align:center;
+            opacity:.65;
+            border-top:1px solid rgba(255,255,255,.08);
+          }
+
           .sub {
             margin: 0;
             max-width: 640px;
