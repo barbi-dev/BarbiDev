@@ -10,6 +10,12 @@ type Testimonial = {
 const testimonials: Testimonial[] = [
   {
     text:
+      "Servicio 10/10! Bárbara me brindó asesoría personalizada en la metodología y análisis de datos para mi proyecto de posgrado. Se ajustó a mis horarios y entendí cada proceso hasta los resultados, recomendada!!",
+    name: "José P",
+    role: "Estudiante de posgrado",
+  },
+  {
+    text:
       "Bárbara me ayudo mucho en la estadística, redacción y estructura de mi proyecto, me explico paso a paso como se debe realizar y si no entendía algo lo volvía a explicar hasta entenderlo, logró comprometerse y ajustarse a los horarios que  de entrega y a gustos de investigador. Me encantó su pedagogía y conocimientos al momento de realizar el proyecto 100% recomendada.",
     name: "Patricio L",
     role: "Estudiante de posgrado",
@@ -19,6 +25,12 @@ const testimonials: Testimonial[] = [
       "Bárbara me brindó un excelente acompañamiento en el análisis de los datos y números que tenía para el manejo y crecimiento de mi empresa, resultados claros y muy profesionales… 100% recomendada.",
     name: "Jessica V",
     role: "Empresaria",
+  },
+  {
+    text:
+      "Muy profesional, me ayudó a construir una aplicación de análisis de datos para mi empresa,con base de datos de mis clientes. Me ahorró mucho tiempo en mis actividades diarias por un precio muy accesible. Gracias!",
+    name: "Gabriela M",
+    role: "Emprendedora",
   },
 ];
 

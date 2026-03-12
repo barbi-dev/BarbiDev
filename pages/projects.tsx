@@ -123,7 +123,7 @@ export default function Projects() {
         </section>
 
         <footer className="footer">
-        <span>© BarbiDev · Estadística & Python · Ecuador / Online</span>
+        <span>© BarbiDev · Estadística & Python · Ecuador </span>
         </footer>
 
         <style jsx>{`

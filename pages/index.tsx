@@ -5,17 +5,28 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>BarbiDev | Estadística & Python para tesis y proyectos</title>
+        <title>BarbiDev | Estadística & Programación para tesis y proyectos</title>
         <meta
           name="description"
-          content="Asesoría experta en análisis estadístico y proyectos Python para tesis, artículos e investigaciones. Guía real para entender, justificar y defender resultados."
+          content="Asesoría en análisis estadístico y proyectos de programación para tesis, artículos e investigaciones en Ecuador. "
         />
-        <meta property="og:title" content="BarbiDev | Estadística & Python" />
+        <meta property="og:title" content="BarbiDev | Estadística & Programación" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://barbi-dev.vercel.app" />
         <meta
           property="og:description"
-          content="Asesoría experta para tesis e investigaciones. No hago tu tesis por ti: te enseño, te guío y te preparo para defender."
+          content="Asesoría para tesis e investigaciones. Análisis estadístico, Programación en Python y más."
         />
-        <meta property="og:image" content="/og-image.jpg" />
+        <meta property="og:image" content="https://barbi-dev.vercel.app/ogbd.png" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="BarbiDev | Estadística & Programación" />
+        <meta
+          name="twitter:description"
+          content="Asesoría para tesis e investigaciones. Análisis estadístico, Programación en Python y más."
+        />
+        <meta name="twitter:image" content="https://barbi-dev.vercel.app/ogbd.png" />
+
       </Head>
 
       <Landing />

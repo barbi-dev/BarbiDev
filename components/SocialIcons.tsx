@@ -5,7 +5,7 @@ export default function SocialIcons() {
     <div className={styles.social}>
       {/* TikTok */}
       <a
-        className={styles.iconLink}
+        className={`${styles.iconLink} ${styles.reveal1}`}
         href="https://www.tiktok.com/@barbi.talk"
         target="_blank"
         rel="noreferrer"
@@ -17,7 +17,7 @@ export default function SocialIcons() {
 
       {/* Instagram */}
       <a
-        className={styles.iconLink}
+        className={`${styles.iconLink} ${styles.reveal2}`}
         href="https://www.instagram.com/barbi_dev_/"
         target="_blank"
         rel="noreferrer"
@@ -42,7 +42,7 @@ export default function SocialIcons() {
 
       {/* GitHub */}
       <a
-        className={styles.iconLink}
+        className={`${styles.iconLink} ${styles.reveal3}`}
         href="https://github.com/barbi-dev"
         target="_blank"
         rel="noreferrer"
@@ -53,7 +53,7 @@ export default function SocialIcons() {
 
       {/* Youtube*/}
       <a
-        className={styles.iconLink}
+        className={`${styles.iconLink} ${styles.reveal4}`}
         href="https://www.youtube.com/@barbi-dev"
         target="_blank"
         rel="noreferrer"
@@ -75,7 +75,7 @@ export default function SocialIcons() {
 
       {/* LinkedIn */}
       <a
-        className={styles.iconLink}
+        className={`${styles.iconLink} ${styles.reveal5}`}
         href="https://www.linkedin.com/in/barbara-villacis-1o618033"
         target="_blank"
         rel="noreferrer"
