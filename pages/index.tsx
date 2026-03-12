@@ -17,7 +17,7 @@ export default function Home() {
           property="og:description"
           content="Asesoría para tesis e investigaciones. Análisis estadístico, Programación en Python y más."
         />
-        <meta property="og:image" content="https://barbi-dev.vercel.app/ogbd.png" />
+        <meta property="og:image" content="https://barbi-dev.vercel.app/ogbd.jpg" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="BarbiDev | Estadística & Programación" />
@@ -25,7 +25,7 @@ export default function Home() {
           name="twitter:description"
           content="Asesoría para tesis e investigaciones. Análisis estadístico, Programación en Python y más."
         />
-        <meta name="twitter:image" content="https://barbi-dev.vercel.app/ogbd.png" />
+        <meta name="twitter:image" content="https://barbi-dev.vercel.app/ogbd.jpg" />
 
       </Head>
 
