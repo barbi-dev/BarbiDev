@@ -10,12 +10,12 @@ export default function Home() {
           name="description"
           content="Asesoría en análisis estadístico y proyectos de programación para tesis, artículos e investigaciones en Ecuador. "
         />
-        <meta property="og:title" content="BarbiDev | Estadística & Programación" />
+        <meta property="og:title" content="Estadística & Programación | BarbiDev " />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://barbi-dev.vercel.app" />
         <meta
           property="og:description"
-          content="Asesoría para tesis e investigaciones. Análisis estadístico, Programación en Python y más."
+          content="Asesoría en análisis estadístico y proyectos de programación para tesis, artículos e investigaciones en Ecuador."
         />
         <meta property="og:image" content="https://barbi-dev.vercel.app/ogbd.jpg" />
 
