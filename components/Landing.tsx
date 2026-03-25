@@ -6,13 +6,14 @@ import GithubModalContent from "./GithubModal";
 import ProjectsModalContent from "./ProjectsModal";
 import VisualizerModalContent from "./VisualizerModal";
 import TestimonialsModalContent from "./TestimonialsModal";
+import Link from "next/link";
 
 
 type Lang = "es" | "en";
 
 const copy = {
   es: {
-    nav: { services: "Servicios", work: "Proyectos", store: "Tienda", about: "About", contact: "Contact" },
+    nav: { services: "Servicios", work: "Proyectos", questionnaires: "Cuestionarios", about: "About", contact: "Contact" },
     promo: "Asesorías 1:1 · Respuesta rápida, agenda ahora!",
     headline: "Hola, soy ",
     headline2:" BarbiDev",
@@ -68,7 +69,7 @@ const copy = {
     footer: "© BarbiDev · Estadística & Programación · Ecuador",
   },
   en: {
-    nav: { services: "Services", work: "Work", store: "Store", about: "About", contact: "Contact" },
+    nav: { services: "Services", work: "Work", questionnaires: "Questionnaires", about: "About", contact: "Contact" },
     promo: "1:1 coaching · Quick response ",
     headline: "Hi, I'm",
     headline2:"BarbiDev",
@@ -219,7 +220,7 @@ useEffect(() => {
           <div className={styles.navLinks}>
             <a href="#services1">{t.nav.services}</a>
             <a href="/projects" rel="noopener noreferrer">{t.nav.work}</a>
-            <a href="#store">{t.nav.store}</a>
+            <a href="/cuestionarios">{t.nav.questionnaires}</a>
             <a href="#about">{t.nav.about}</a>
             <a href="#contact">{t.nav.contact}</a>
           </div>
@@ -258,7 +259,7 @@ useEffect(() => {
         <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
           <a href="#services1" onClick={() => setMenuOpen(false)}>{t.nav.services}</a>
           <a href="/projects" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
-          <a href="#store" onClick={() => setMenuOpen(false)}>{t.nav.store}</a>
+          <a href="/cuestionarios" onClick={() => setMenuOpen(false)}>{t.nav.questionnaires}</a>
           <a href="#about" onClick={() => setMenuOpen(false)}>{t.nav.about}</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>{t.nav.contact}</a>
         </div>
