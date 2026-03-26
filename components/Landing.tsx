@@ -6,7 +6,6 @@ import GithubModalContent from "./GithubModal";
 import ProjectsModalContent from "./ProjectsModal";
 import VisualizerModalContent from "./VisualizerModal";
 import TestimonialsModalContent from "./TestimonialsModal";
-import Link from "next/link";
 
 
 type Lang = "es" | "en";
@@ -213,7 +212,7 @@ useEffect(() => {
       <header ref={headerRef} className={styles.header} data-sticky="header">
         <nav className={styles.nav}>
           <div className={styles.brand}>
-            <a className={styles.brandName} href="#top"><img src="icono.png" alt="BarbiDev" width={48} /></a>
+            <a className={styles.brandName} href="#top"><img src="/icono.png" alt="BarbiDev" width={48} /></a>
           </div>
 
           {/* Desktop links */}
