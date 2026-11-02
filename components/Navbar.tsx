@@ -1,143 +1,48 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import styles from "../styles/landing.module.css";
+import styles from "../styles/home.module.css";
 
-type Lang = "es" | "en";
+type Page = "home" | "projects" | "questionnaires" | "physics";
 
-type NavbarProps = {
-  lang: Lang;
-  setLang: React.Dispatch<React.SetStateAction<Lang>>;
-  currentPage?: "home" | "projects" | "questionnaires" | "physics";
-};
-
-const copy = {
-  es: {
-    nav: {
-      services: "Servicios",
-      work: "Proyectos",
-      questionnaires: "Cuestionarios",
-      about: "About",
-      contact: "Contact",
-    },
-  },
-  en: {
-    nav: {
-      services: "Services",
-      work: "Projects",
-      questionnaires: "Questionnaires",
-      about: "About",
-      contact: "Contact",
-    },
-  },
-} as const;
-
-export default function Navbar({
-  lang,
-  currentPage = "home",
-}: NavbarProps) {
+export default function Navbar({ currentPage = "home" }: { currentPage?: Page }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const headerRef = useRef<HTMLElement | null>(null);
-  const t = copy[lang];
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const booking = `https://wa.me/593987292609?text=${encodeURIComponent("Hola Bárbara. Quiero cotizar clases online.\nCarrera y semestre: \nTemas que necesito trabajar: \nHorario disponible: ")}`;
+  const links: { href: string; label: string; page?: Page }[] = [
+    { href: currentPage === "home" ? "#services1" : "/#services1", label: "Servicios" },
+    { href: "/clases-de-fisica-online", label: "Clases de física", page: "physics" },
+    { href: "/projects", label: "Proyectos", page: "projects" },
+    { href: "/cuestionarios", label: "Cuestionarios", page: "questionnaires" },
+    { href: currentPage === "home" ? "#about" : "/#about", label: "Cómo aprendes" },
+  ];
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && menuOpen) { setMenuOpen(false); menuButton.current?.focus(); }
     };
+    const onResize = () => { if (window.innerWidth > 1040) setMenuOpen(false); };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth > 1040) setMenuOpen(false);
-    };
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  useEffect(() => {
-    const header = headerRef.current;
-    if (!header) return;
-
-    const onScroll = () => {
-      header.classList.toggle(styles.headerScrolled, window.scrollY > 8);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
     };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const navHref = {
-    services: currentPage === "home" ? "#services1" : "/#services1",
-    work: "/projects",
-    questionnaires: "/cuestionarios",
-    about: currentPage === "home" ? "#about" : "/#about",
-    contact: currentPage === "home" ? "#contact" : "/#contact",
-  };
+  }, [menuOpen]);
 
   return (
-    <header ref={headerRef} className={styles.header} data-sticky="header">
-      <nav className={styles.nav}>
-        <div className={styles.brand}>
-          <Link className={styles.brandName} href="/">
-            <img src="/icono.png" alt="BarbiDev" width={48} />
-          </Link>
-        </div>
-
-        <div className={styles.navLinks}>
-          <Link href={navHref.services}>{t.nav.services}</Link>
-          <Link href="/clases-de-fisica-online" aria-current={currentPage === "physics" ? "page" : undefined}>
-            {lang === "es" ? "Clases de física" : "Physics classes"}
-          </Link>
-          <Link href={navHref.work}>{t.nav.work}</Link>
-          <Link href={navHref.questionnaires}>{t.nav.questionnaires}</Link>
-          <Link href={navHref.about}>{t.nav.about}</Link>
-          <Link href={navHref.contact}>{t.nav.contact}</Link>
-        </div>
-
-        <div className={styles.navRight}>
-
-          <button
-            className={styles.burger}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((v) => !v)}
-            type="button"
-          >
-            <span className={styles.burgerLines} />
-          </button>
-        </div>
+    <header className={styles.header}>
+      <nav className={styles.nav} aria-label="Navegación principal">
+        <Link className={styles.logo} href="/" aria-label="BarbiDev, inicio">
+          <img src="/icono.png" width="32" height="32" alt="" />
+          <span>barbi<span className={styles.logoAccent}>dev</span><span className={styles.logoDot}>.</span></span>
+        </Link>
+        <div className={styles.desktopLinks}>{links.map(link => <Link href={link.href} key={link.label} aria-current={link.page === currentPage ? "page" : undefined}>{link.label}</Link>)}</div>
+        <a className={styles.navCta} href={booking} target="_blank" rel="noopener noreferrer">Reserva tu clase <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
+        <button ref={menuButton} className={styles.menuButton} type="button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} aria-controls="site-menu" onClick={() => setMenuOpen(!menuOpen)}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d={menuOpen ? "m6 6 12 12M6 18 18 6" : "M4 8h16M4 16h16"} /></svg></button>
       </nav>
-
-      {menuOpen && (
-        <button
-          className={styles.menuOverlay}
-          aria-label="Close menu"
-          onClick={() => setMenuOpen(false)}
-          type="button"
-        />
-      )}
-
-      <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
-        <Link href={navHref.services} onClick={() => setMenuOpen(false)}>
-          {t.nav.services}
-        </Link>
-        <Link href="/clases-de-fisica-online" onClick={() => setMenuOpen(false)} aria-current={currentPage === "physics" ? "page" : undefined}>
-          {lang === "es" ? "Clases de física" : "Physics classes"}
-        </Link>
-        <Link href={navHref.work} onClick={() => setMenuOpen(false)}>
-          {t.nav.work}
-        </Link>
-        <Link href={navHref.questionnaires} onClick={() => setMenuOpen(false)}>
-          {t.nav.questionnaires}
-        </Link>
-        <Link href={navHref.about} onClick={() => setMenuOpen(false)}>
-          {t.nav.about}
-        </Link>
-        <Link href={navHref.contact} onClick={() => setMenuOpen(false)}>
-          {t.nav.contact}
-        </Link>
+      <div id="site-menu" className={styles.mobileLinks} hidden={!menuOpen}>
+        {links.map(link => <Link href={link.href} key={link.label} aria-current={link.page === currentPage ? "page" : undefined} onClick={() => setMenuOpen(false)}>{link.label}</Link>)}
+        <a href={booking} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>Reservar por WhatsApp ↗</a>
       </div>
     </header>
   );

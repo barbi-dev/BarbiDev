@@ -1,453 +1,67 @@
-import { useEffect, useMemo, useState, useRef } from "react";
-import styles from "../styles/landing.module.css";
-import ProofIcon from "./ProofIcons";
-import SocialIcons from "./SocialIcons"; 
-import GithubModalContent from "./GithubModal";
-import ProjectsModalContent from "./ProjectsModal";
-import VisualizerModalContent from "./VisualizerModal";
-import TestimonialsModalContent from "./TestimonialsModal";
+import Image from "next/image";
+import Link from "next/link";
+import Navbar from "./Navbar";
+import SiteFooter from "./SiteFooter";
+import styles from "../styles/home.module.css";
 
+const whatsapp = (subject: string) => `https://wa.me/593987292609?text=${encodeURIComponent(`Hola Bárbara. Quiero cotizar ${subject}.\nCarrera y semestre: \nTemas que necesito trabajar: \nHorario disponible: `)}`;
+const booking = whatsapp("clases online");
 
-type Lang = "es" | "en";
-
-const copy = {
-  es: {
-    nav: { services: "Servicios", work: "Proyectos", questionnaires: "Cuestionarios", about: "About", contact: "Contact" },
-    promo: "Asesorías 1:1 · Respuesta rápida, agenda ahora!",
-    headline: "Hola, soy ",
-    headline2:" BarbiDev",
-    subheadline:
-      "Experta en análisis estadístico y programación en Python para tesis, artículos científicos e investigaciones.",
-    promise:
-      " ",
-    ctaPrimary: "Consultar por WhatsApp",
-    ctaSecondary: "Ver Servicios",
-    workTitle: "¿Como puedo asesorarte?",
-    workIntro: " ",
-    routeStats: {
-      title: "ANÁLISIS ESTADÍSTICO",
-      bullets: [
-        "Limpieza, descriptivo y visualización",
-        "Pruebas (t, ANOVA, χ², no paramétricas)",
-        "Correlación y asociación",
-        "Regresión (lineal / logística) + diagnóstico",
-        "Panel / longitudinal (FE/RE) si aplica",
-        "Tablas y redacción de resultados listos para tesis",
-      ],
-      button: "Más información",
-    },
-    routePy: {
-      title: "PROYECTO DE PROGRAMACIÓN",
-      bullets: [
-        "Simulaciones (física / modelos) con rigor",
-        "Automatización de análisis y reportes",
-        "Dashboards y visualización pro",
-        "Estructura de proyecto + buenas prácticas",
-        "Interpretación de resultados (no solo código)",
-      ],
-      button: "Más información",
-    },
-    proofTitle: "UN VISTAZO A MI TRABAJO",
-    proofCards: [
-      { icon: "projects", k: "Proyectos", v: "Enfoque metodológico aplicado" },
-      { icon: "visualizer", k: "Visualizador", v: "Capturas de productos entregados" },
-      { icon: "github", k: "GitHub", v: "Código y demos gratis" },
-      { icon: "testimonials", k: "Testimonios", v: "Opiniones de clientes" },
-    ],
-    faqTitle: "FAQ",
-    faq: [
-      {
-        q: "¿Haces la tesis por mí?",
-        a: "Te asesoro y te enseño a ejecutar e interpretar, para que puedas justificarlo y defenderlo ante tu tribunal.",
-      },
-      { q: "¿Qué necesito para iniciar?", a: "Tu base de datos, tu pregunta/objetivo y tu fecha límite." },
-      { q: "¿Trabajas con urgencias?", a: "Sí, según disponibilidad. Te digo tiempos reales antes de empezar." },
-    ],
-    contactTitle: "¿Tienes alguna pregunta?",
-    contactIntro: "Escríbeme por WhatsApp y te respondo con un plan claro y realista.",
-    footer: "© BarbiDev · Estadística & Programación · Ecuador",
-  },
-  en: {
-    nav: { services: "Services", work: "Work", questionnaires: "Questionnaires", about: "About", contact: "Contact" },
-    promo: "1:1 coaching · Quick response ",
-    headline: "Hi, I'm",
-    headline2:"BarbiDev",
-    subheadline:
-      "I help you with statistical analysis and Python projects for theses, papers, and research.",
-    promise:
-      " ",
-    ctaPrimary: "Contact on WhatsApp",
-    ctaSecondary: "See Services",
-    workTitle: "How can I assist you?",
-    workIntro: " ",
-    routeStats: {
-      title: "STATISTICAL ANALYSIS",
-      
-      button: "More info",
-    },
-    routePy: {
-      title: "PROGRAMMING PROJECT",
-      
-      button: "More info",
-    },
-    proofTitle: "A GLIMPSE OF MY WORK",
-    proofCards: [
-      { icon: "projects", k: "Projects", v: "Methodological approach applied" },
-      { icon: "visualizer", k: "Visualizer", v: "Screenshots of delivered products" },
-      { icon: "github", k: "GitHub", v: "Free code and demos" },
-      { icon: "testimonials", k: "Testimonials", v: "Customer reviews" },
-    ],
-
-    faqTitle: "FAQ",
-    faq: [
-      {
-        q: "Do you do the thesis for me?",
-        a: "I guide and teach you to execute and interpret, so you can justify and defend it.",
-      },
-      { q: "What do you need to start?", a: "Your dataset, research goal, and deadline." },
-      { q: "Do you handle urgent cases?", a: "Yes, depending on availability. I confirm realistic timing upfront." },
-    ],
-    contactTitle: "Have any questions?",
-    contactIntro: "Message me on WhatsApp and I’ll reply with a clear and realistic plan.",
-    footer: "© BarbiDev · Statistics & Programming · Ecuador / Remote",
-  },
-} satisfies Record<Lang, any>;
-
-function buildWhatsAppLink(message: string) {
-  const phone = "593987292609";
-  const text = encodeURIComponent(message);
-  return `https://wa.me/${phone}?text=${text}`;
+function Arrow({ diagonal = false }: { diagonal?: boolean }) {
+  return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={diagonal ? "M6 18 18 6M6 6h12v12" : "M4 12h16m-6-6 6 6-6 6"} /></svg>;
 }
 
+function SubjectIcon({ kind }: { kind: "physics" | "python" | "methods" }) {
+  return <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    {kind === "physics" ? <><ellipse cx="16" cy="16" rx="14" ry="5.5" transform="rotate(-35 16 16)" /><ellipse cx="16" cy="16" rx="14" ry="5.5" transform="rotate(35 16 16)" /><circle cx="16" cy="16" r="2" fill="currentColor" /></> : kind === "python" ? <path d="m11 8-8 8 8 8m10-16 8 8-8 8m-3-20-4 24" /> : <><path d="M4 4v24h24M7 23l6-9 6 4 9-13" /><circle cx="13" cy="14" r="2" fill="currentColor" /><circle cx="19" cy="18" r="2" fill="currentColor" /></>}
+  </svg>;
+}
+
+const services = [
+  { kind: "physics" as const, number: "01", label: "ENTIENDE EL UNIVERSO", title: "Física universitaria", text: "Clásica, moderna y ondas. Del concepto al problema resuelto.", tags: "Física · Ingeniería · Afines", link: "/clases-de-fisica-online", cta: "Explorar las clases" },
+  { kind: "python" as const, number: "02", label: "CONVIERTE IDEAS EN CÓDIGO", title: "Python aplicado", text: "Aprende programando. Simulaciones, análisis y proyectos científicos.", tags: "Python · Ciencia · Proyectos", link: whatsapp("asesoría en Python"), cta: "Consultar por Python" },
+  { kind: "methods" as const, number: "03", label: "CONECTA TEORÍA Y PRÁCTICA", title: "Métodos y modelos", text: "Métodos matemáticos y numéricos para los retos de tu carrera.", tags: "Matemática · Cálculo · Modelos", link: whatsapp("clases de métodos matemáticos y numéricos"), cta: "Consultar por métodos" },
+];
+
 export default function Landing() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth > 1040) setMenuOpen(false);
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-
-  const [lang, setLang] = useState<Lang>("es");
-  const t = copy[lang];
-
-  const waGeneral = useMemo(() => {
-    const msg =
-      lang === "es"
-        ? `Hola Bárbara. Necesito asesoría en:  `
-        : `Hi BarbiDev. I need guidance with:  `;
-    return buildWhatsAppLink(msg);
-  }, [lang]);
-
-  const waStats = useMemo(() => {
-    const msg =
-      lang === "es"
-        ? `Hola Bárbara. Quiero tu asesoría en un ANÁLISIS ESTADÍSTICO. \n\nTema: \nFecha límite: `
-        : `Hi. I would like your assistance with a STATISTICAL ANALISYS.\n\nTopic: \nDeadline:`;
-    return buildWhatsAppLink(msg);
-  }, [lang]);
-
-  const waPy = useMemo(() => {
-    const msg =
-      lang === "es"
-        ? `Hola Bárbara. Quiero tu asesoría para un proyecto de programación.\n\nTema \nFecha límite:`
-        : `Hi. I  would like your assistance with a programming project.\n\nTopic \nDeadline:`;
-    return buildWhatsAppLink(msg);
-  }, [lang]);
-  const headerRef = useRef<HTMLElement | null>(null);
-  useEffect(() => {
-    const header = headerRef.current;
-      if (!header) return;
-      const onScroll = () => {
-        header.classList.toggle(styles.headerScrolled, window.scrollY > 8);
-  };
-
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  return () => window.removeEventListener("scroll", onScroll);
-}, []);
-
-type ModalKey = null | "projects" | "visualizer" | "github" | "testimonials";
-const [modal, setModal] = useState<ModalKey>(null);
-
-useEffect(() => {
-  const onKey = (e: KeyboardEvent) => {
-    if (e.key === "Escape") setModal(null);
-  };
-  window.addEventListener("keydown", onKey);
-  return () => window.removeEventListener("keydown", onKey);
-}, []);
-useEffect(() => {
-  if (!modal) return;
-  const prev = document.body.style.overflow;
-  document.body.style.overflow = "hidden";
-  return () => {
-    document.body.style.overflow = prev;
-  };
-}, [modal]);
-
-
   return (
-    <div className={styles.page}>
-      {/* Top promo bar */}
-      <div className={styles.promo} data-sticky="promo">
-        <span>{t.promo}</span>
-        <a className={styles.promoLink} href={waGeneral} target="_blank" rel="noreferrer">
-          WhatsApp →
-        </a>
-      </div>
-
-      {/* Nav */}
-      <header ref={headerRef} className={styles.header} data-sticky="header">
-        <nav className={styles.nav}>
-          <div className={styles.brand}>
-            <a className={styles.brandName} href="#top"><img src="/icono.png" alt="BarbiDev" width={48} /></a>
+    <div className={styles.page} id="top">
+      <a className={styles.skip} href="#contenido">Ir al contenido</a>
+      <Navbar currentPage="home" />
+      <main id="contenido">
+        <section className={styles.hero} aria-labelledby="hero-title">
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}><span className={styles.statusDot} /> EDUCACIÓN ONLINE · NIVEL UNIVERSITARIO</p>
+            <h1 id="hero-title">Entiende la física.<br /><span>Piensa en Python.</span></h1>
+            <p className={styles.heroText}>Clases que conectan ciencia, código y tu próxima gran idea.</p>
+            <div className={styles.heroActions}><a className={styles.primary} href={booking} target="_blank" rel="noopener noreferrer">Encuentra tu clase <Arrow diagonal /></a><a className={styles.secondary} href="#services1">Explorar servicios <Arrow /></a></div>
+            <div className={styles.heroMeta}><span><span className={styles.smallDot} /> En español, por Zoom</span><span>Desde Ecuador, contigo.</span></div>
           </div>
-
-          {/* Desktop links */}
-          <div className={styles.navLinks}>
-            <a href="#services1">{t.nav.services}</a>
-            <a href="/clases-de-fisica-online">{lang === "es" ? "Clases de física" : "Physics classes"}</a>
-            <a href="/projects" rel="noopener noreferrer">{t.nav.work}</a>
-            <a href="/cuestionarios">{t.nav.questionnaires}</a>
-            <a href="#about">{t.nav.about}</a>
-            <a href="#contact">{t.nav.contact}</a>
-          </div>
-
-          {/* Right actions (lang + burger) */}
-          <div className={styles.navRight}>
-            <button
-              className={styles.langToggle}
-              onClick={() => setLang((p) => (p === "es" ? "en" : "es"))}
-              aria-label="Toggle language"
-            >
-              {lang === "es" ? "ES" : "EN"}
-            </button>
-
-            <button
-              className={styles.burger}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((v) => !v)}
-            >
-              <span className={styles.burgerLines} />
-            </button>
-          </div>
-        </nav>
-
-        {/* Overlay click-to-close */}
-        {menuOpen && (
-          <button
-            className={styles.menuOverlay}
-            aria-label="Close menu"
-            onClick={() => setMenuOpen(false)}
-          />
-        )}
-
-        {/* Mobile dropdown */}
-        <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
-          <a href="#services1" onClick={() => setMenuOpen(false)}>{t.nav.services}</a>
-          <a href="/clases-de-fisica-online" onClick={() => setMenuOpen(false)}>{lang === "es" ? "Clases de física" : "Physics classes"}</a>
-          <a href="/projects" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
-          <a href="/cuestionarios" onClick={() => setMenuOpen(false)}>{t.nav.questionnaires}</a>
-          <a href="#about" onClick={() => setMenuOpen(false)}>{t.nav.about}</a>
-          <a href="#contact" onClick={() => setMenuOpen(false)}>{t.nav.contact}</a>
-        </div>
-      </header>
-
-
-      {/* Hero */}
-      <main className={styles.main}>
-        <section className={`${styles.hero} ${styles.anchor}`} id="services">
-          <div className={styles.heroLeft}>
-            <h1 className={styles.heroTitlePixel}>
-                {t.headline} <br />
-                <span className={styles.heroName}>{t.headline2}</span></h1>
-
-            <p className={styles.subheadline}>{t.subheadline}</p>
-
-            <div className={styles.ctas}>
-              <a className={`${styles.btn} ${styles.btnPrimary}`} href="/clases-de-fisica-online">
-                {lang === "es" ? "Clases de física universitaria online" : "Online university physics classes (Spanish)"}
-              </a>
-              <a className={`${styles.btn} ${styles.btnPrimary}`} href={waGeneral} target="_blank" rel="noreferrer">
-                {t.ctaPrimary}
-              </a>
-              <a className={`${styles.btn} ${styles.btnGlass}`} href="#services1">
-                {t.ctaSecondary}
-              </a>
-            </div>
-
-          </div>
-
-          <section className={styles.section}>
-            <SocialIcons />
-          </section>
-
-          <div className={styles.heroRight}>
-            {/* Pon tu foto cuando la tengas: /public/tu-foto.jpg */}
-            <div className={styles.heroCard}>
-              <div className={styles.techTags}>
-                {["Python","R","SPSS","Matlab","Latex","HTML","CSS","Kaggle","Qiskit","More...",].map((tech) => (
-                  <span key={tech} className={styles.techTag}>{tech}</span>))}
-              </div>
-            </div>
+          <div className={styles.heroVisual}>
+            <div className={styles.visualGlow} aria-hidden="true" />
+            <div className={styles.visualFrame}><Image className={styles.heroImage} src="/images/physics-orbit.webp" alt="Escultura científica de vidrio iridiscente con órbitas luminosas en tonos violeta y cian" width={1024} height={1024} sizes="(max-width: 600px) 92vw, (max-width: 1100px) 48vw, 620px" priority /></div>
+            <div className={`${styles.chip} ${styles.chipPhysics}`}><span className={styles.chipIcon}><SubjectIcon kind="physics" /></span><div><strong>Física, sin límites.</strong><span>Comprende. Conecta. Resuelve.</span></div></div>
+            <div className={`${styles.chip} ${styles.chipCode}`}><span className={styles.codeMark}>&lt;/&gt;</span><div><strong>Ideas → código</strong><span>Python para crear.</span></div><span className={styles.chipDot} /></div>
+            <div className={`${styles.miniChip} ${styles.chipZoom}`}><span className={styles.smallDot} /> Tu aula está donde tú estés</div>
+            <span className={styles.visualCaption} aria-hidden="true">SCIENCE MEETS POSSIBILITY / 01</span>
           </div>
         </section>
-
-        <section className={`${styles.section} ${styles.anchor}`} aria-labelledby="physics-classes-title">
-          <h2 id="physics-classes-title" className={styles.h2}>
-            {lang === "es" ? "Clases de física online para universitarios" : "Online physics classes for university students"}
-          </h2>
-          <p className={styles.lead}>
-            {lang === "es"
-              ? "Para estudiantes de Física, Ingeniería y carreras afines. Física clásica, moderna y de las ondas, métodos matemáticos y métodos numéricos. Clases en español por Zoom, desde Ecuador."
-              : "For Physics, Engineering and related university degrees. Classical, modern and wave physics, mathematical and numerical methods. Lessons in Spanish via Zoom, from Ecuador."}
-          </p>
-          <a className={`${styles.btn} ${styles.btnPrimary}`} href="/clases-de-fisica-online">
-            {lang === "es" ? "Ver materias, horarios y reservar" : "View subjects, availability and booking"}
-          </a>
+        <div className={styles.disciplineStrip} aria-label="Áreas de estudio"><span>PARA MENTES CURIOSAS</span><p>Física<span aria-hidden="true">✦</span>Ingeniería<span aria-hidden="true">✦</span>Python<span aria-hidden="true">✦</span>Ciencia aplicada</p></div>
+        <section className={styles.section} id="services1" aria-labelledby="services-title">
+          <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>01 / LO QUE PODEMOS TRABAJAR</p><h2 id="services-title">Tu siguiente nivel<br /><span>empieza aquí.</span></h2></div><p>Tres caminos.<br />Una forma de ir más allá.</p></div>
+          <div className={styles.serviceGrid}>{services.map(service => <article className={styles.serviceCard} key={service.kind}>
+            <div className={styles.cardTop}><span className={`${styles.serviceIcon} ${styles[service.kind]}`}><SubjectIcon kind={service.kind} /></span><span className={styles.cardNumber}>{service.number}</span></div>
+            <p className={styles.cardLabel}>{service.label}</p><h3>{service.title}</h3><p className={styles.cardText}>{service.text}</p><p className={styles.cardTags}>{service.tags}</p>
+            <a className={styles.cardLink} href={service.link} {...(service.link.startsWith("https:") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{service.cta}<Arrow diagonal /></a>
+          </article>)}</div>
         </section>
-
-        {/* Work routes */}
-        <section className={`${styles.section} ${styles.anchor}`} id="services1">
-          <div className={styles.sectionHead}>
-            <h2 className={styles.h2}>{t.workTitle}</h2>
-            <p className={styles.lead}>{t.workIntro}</p>
-          </div>
-
-          <div className={styles.routes}>
-            <div className={`${styles.routeCard} ${styles.routeStats}`}>
-              <div className={styles.routeTop}>
-                <h3>{t.routeStats.title}</h3>
-                <a href={waStats} target="_blank" rel="noreferrer">
-                  <span className={styles.routeTag}>CHATEAR</span>
-                </a>
-              </div>
-              
-              
-
-              <img className={styles.imgservices} src="estadistica.png" alt="analisis estadístico"/>
-
-              <a className={`${styles.btn} ${styles.btnPrimary}`} href={waStats} target="_blank" rel="noreferrer">
-                {t.routeStats.button}
-              </a>
-            </div>
-
-            <div className={`${styles.routeCard} ${styles.routePy}`}>
-              <div className={styles.routeTop}>
-                <h3>{t.routePy.title}</h3>
-                <a href={waPy} target="_blank" rel="noreferrer">
-                  <span className={styles.routeTagAlt}>CHATEAR</span>
-                </a>
-              </div>
-              <img className={styles.imgservices} src="programacion.png" alt="programación" />
-
-              <a className={`${styles.btn} ${styles.btnGlass}`} href={waPy} target="_blank" rel="noreferrer">
-                {t.routePy.button}
-              </a>
-            </div>
-          </div>
+        <section className={`${styles.section} ${styles.learning}`} id="about" aria-labelledby="learning-title">
+          <div><p className={styles.eyebrow}>02 / CÓMO APRENDES AQUÍ</p><h2 id="learning-title">Menos memorizar.<br /><span>Más comprender.</span></h2><Link className={styles.textLink} href="/projects">Explora la física en movimiento <Arrow diagonal /></Link></div>
+          <ol className={styles.steps}><li><span>01</span><div><h3>Partimos de tu duda.</h3><p>Tu materia, tu nivel, tu objetivo.</p></div></li><li><span>02</span><div><h3>Conectamos las ideas.</h3><p>Conceptos claros. Ejercicios con sentido.</p></div></li><li><span>03</span><div><h3>Lo llevas a la práctica.</h3><p>Problemas reales. Código que funciona.</p></div></li></ol>
         </section>
-
-        {/* Proof */}
-        <section className={`${styles.section} ${styles.anchor}`} id="about">
-          <div className={styles.sectionHead}>
-            <h2 className={styles.h2}>{t.proofTitle}</h2>
-          </div>
-
-          <div className={styles.grid4}>
-            {t.proofCards.map((c: any) => (
-              <div key={c.k} className={styles.proofCard}
-              role="button" tabIndex={0} onClick={() => setModal(c.icon)}>
-                <ProofIcon
-                  name={c.icon}
-                  size={36}
-                  className={styles.proofIcon}
-                />
-                <div className={styles.proofK}><span>{c.k}</span>
-                </div>
-                <div className={styles.proofV}>{c.v}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className={styles.section}>
-          <div className={styles.sectionHead}>
-            <h2 className={styles.h2}>{t.faqTitle}</h2>
-          </div>
-
-          <div className={styles.faq}>
-            {t.faq.map((item: any) => (
-              <details key={item.q} className={styles.faqItem}>
-                <summary>{item.q}</summary>
-                <p>{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        {/* Contact */}
-        <section className={`${styles.contact} ${styles.anchor}`} id="contact">
-          <h2 className={styles.h2}>{t.contactTitle}</h2>
-          <div className={styles.contactInner}>
-            
-            <p className={styles.lead}>{t.contactIntro}</p>
-            <a className={`${styles.btn} ${styles.btnPrimary}`} href={waGeneral} target="_blank" rel="noreferrer">
-              {t.ctaPrimary}
-            </a>
-          </div>
-        </section>
-
-        {/* Store placeholder */}
-        <section className={`${styles.section} ${styles.anchor}`} id="store">
-          <div className={styles.sectionHead}>
-            <h2 className={styles.h2}>Store</h2>
-            <p className={styles.lead}>
-              Guías, mini-cursos o recursos descargables.
-            </p>
-          </div>
-        </section>
-
-        <section className={styles.section}>
-            <SocialIcons />
-        </section>
-        
+        <section className={styles.contact} id="contact" aria-labelledby="contact-title"><div className={styles.contactGlow} aria-hidden="true" /><p className={styles.eyebrow}><span className={styles.statusDot} /> TU PRÓXIMO PASO</p><h2 id="contact-title">Las grandes ideas<br />empiezan con <span>una pregunta.</span></h2><p>Trae la tuya. La trabajamos juntos.</p><a className={styles.primary} href={booking} target="_blank" rel="noopener noreferrer">Hablemos por WhatsApp <Arrow diagonal /></a><span className={styles.contactNote}>Cotización personalizada · Horarios a convenir</span></section>
       </main>
-      {modal && (
-        <div className={styles.modalOverlay} onClick={() => setModal(null)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={() => setModal(null)} aria-label="Close">
-              ✕
-            </button>
-
-            {modal === "projects" && <ProjectsModalContent />}
-            {modal === "visualizer" && <VisualizerModalContent />}
-            {modal === "github" && <GithubModalContent />}
-            {modal === "testimonials" && <TestimonialsModalContent />}
-          </div>
-        </div>
-      )}
-
-      
-
-
-      <footer className={styles.footer}>
-        <span>{t.footer}</span>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

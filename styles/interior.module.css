@@ -1,0 +1,89 @@
+.main { max-width: 1320px; margin: 0 auto; padding: 30px 48px 72px; }
+.pageHeader { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 54px; }
+.pageHeader h1, .quizHero h1 { font-weight: 700; font-size: clamp(2.6rem, 4.6vw, 4rem); letter-spacing: -.055em; line-height: 1.13; margin: 0 0 24px; }
+.pageHeader h1 span, .quizHero h1 span { color: var(--violet); }
+.lead { max-width: 510px; color: #bab3ca; font-size: 15px; font-weight: 300; line-height: 1.9; margin: 0; }
+.pageHeader > a { flex-shrink: 0; margin-bottom: 8px; }
+.projectGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.projectCard { display: block; overflow: hidden; background: linear-gradient(145deg, #16131fbb, #0d0f16a8); border: 1px solid #ffffff1c; border-radius: 24px; transition: border-color .25s, box-shadow .25s; }
+.projectCard:hover, .projectCard:focus-visible { border-color: #b7a0ff70; box-shadow: 0 15px 50px #0003; }
+.projectImage { position: relative; aspect-ratio: 16 / 10; background: #090a11; overflow: hidden; }
+.projectImage img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+.projectCard:hover .projectImage img { transform: scale(1.025); }
+.imageIndex { position: absolute; left: 20px; top: 20px; border: 1px solid #ffffff26; border-radius: 50px; padding: 9px 12px; background: #090a11db; color: #e1d9ed; font-size: 8px; letter-spacing: 1.2px; }
+.newBadge { position: absolute; right: 20px; top: 20px; border: 1px solid #91e5e13d; padding: 9px 12px; border-radius: 50px; background: #0d2423dc; color: var(--cyan); font-size: 8px; letter-spacing: 1px; }
+.openIcon { position: absolute; bottom: 20px; right: 20px; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: #171421dd; border: 1px solid #ffffff33; color: white; font-size: 22px; }
+.projectBody { padding: 28px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags > span { color: #bfb4d0; border: 1px solid #ffffff18; border-radius: 50px; padding: 6px 10px; font-size: 9px; line-height: 1.5; background: #ffffff03; }
+.projectBody h2 { font-size: 25px; line-height: 1.3; letter-spacing: -.7px; font-weight: 600; margin: 22px 0 13px; }
+.projectBody > p { font-size: 13px; color: #b8afc6; font-weight: 300; line-height: 1.9; margin: 0; }
+.cardAction { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #ffffff16; margin-top: 27px; padding-top: 22px; font-size: 12px; font-weight: 500; }
+.cardAction > span { color: var(--violet); font-size: 18px; }
+.callout { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 40px; margin-top: 80px; border: 1px solid #b7a0ff28; border-radius: 24px; background: radial-gradient(ellipse at 0% 100%, #6b3b9f18, transparent 65%), #0e0e17; }
+.callout > a { flex-shrink: 0; }
+.callout h2 { font-weight: 600; font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1.3; letter-spacing: -.04em; margin: 0 0 12px; }
+.callout p:not(:first-child) { color: #b8afc6; font-size: 13px; line-height: 1.9; font-weight: 300; margin: 0; }
+.callout > div > p:first-child { margin-bottom: 14px; }
+.quizHero { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 36px; padding: 0 0 20px; min-height: 490px; }
+.quizHero h1 { font-size: clamp(2.4rem, 4.2vw, 3.8rem); }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+.quizFacts { display: flex; flex-wrap: wrap; gap: 12px 20px; list-style: none; margin: 24px 0 0; padding: 0; color: #afa3c0; font-size: 10px; line-height: 1.8; }
+.quizFacts li { display: flex; align-items: center; gap: 8px; }
+.quizFacts li::before { content: ""; width: 4px; height: 4px; background: var(--cyan); border-radius: 50%; }
+.note { color: #a99dbb; font-size: 10px; line-height: 1.8; margin-top: 20px; }
+.diagnostic { position: relative; background: radial-gradient(ellipse at 90% 0%, #7652ab1e, transparent 65%), linear-gradient(145deg, #181520db, #0d0f16c2); border: 1px solid #b7a0ff30; border-radius: 26px; padding: 30px; box-shadow: 0 30px 80px #0003; }
+.diagnosticHeader { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.panelLabel { color: #b2a5c7; font-size: 8px; letter-spacing: 1.3px; }
+.liveBadge { display: inline-flex; align-items: center; gap: 6px; color: var(--cyan); background: #91e5e10a; border: 1px solid #91e5e12b; border-radius: 50px; padding: 7px 10px; font-size: 8px; letter-spacing: 1px; }
+.diagnosticIcon { width: 76px; height: 76px; display: grid; place-items: center; border: 1px solid #b7a0ff35; background: #b7a0ff0d; color: var(--violet); border-radius: 22px; margin: 35px 0 24px; }
+.diagnostic h2 { font-size: 31px; font-weight: 600; line-height: 1.25; letter-spacing: -.04em; margin: 0 0 15px; }
+.diagnostic h2 span { color: var(--violet); }
+.diagnostic > p { color: #b8afc6; font-size: 12px; font-weight: 300; line-height: 1.8; margin-bottom: 23px; }
+.resultList { list-style: none; padding: 0; margin: 0; }
+.resultList li { display: flex; align-items: center; gap: 13px; border-top: 1px solid #ffffff15; padding: 14px 0; font-size: 11px; color: #d1c9df; }
+.resultList li:last-child { padding-bottom: 0; }
+.resultList li > span { color: #b7a0ff; font-size: 9px; }
+.quizSection { padding-top: 60px; }
+.sectionIntro { margin-bottom: 30px; }
+.sectionIntro h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.25; letter-spacing: -.045em; margin: 0; }
+.sectionIntro h2 span { color: #a5a1b9; }
+.sectionIntro > p { margin-bottom: 16px; }
+.quizCard { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 50px; border: 1px solid #ffffff1c; border-radius: 22px; padding: 34px; background: linear-gradient(145deg, #17131f9e, #0d0f1680); }
+.quizCard h3 { font-size: 22px; font-weight: 600; letter-spacing: -.5px; margin: 20px 0 14px; line-height: 1.4; }
+.quizCard p { color: #b8afc6; font-weight: 300; font-size: 13px; line-height: 1.9; margin: 0 0 24px; max-width: 630px; }
+.quizActions { display: flex; flex-direction: column; gap: 18px; align-items: center; }
+.textLink { color: #cfbcec !important; font-size: 10px; line-height: 1.7; }
+.textLink:hover { text-decoration: underline; }
+.benefitGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.benefitCard { border: 1px solid #ffffff16; border-radius: 22px; padding: 28px; background: linear-gradient(145deg, #15141fba, #0d0f1680); }
+.benefitCard > span { color: var(--violet); font-size: 10px; }
+.benefitCard h3 { font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -.3px; margin: 24px 0 14px; }
+.benefitCard p { color: #b8afc6; font-size: 13px; font-weight: 300; line-height: 1.9; margin: 0; }
+@media (max-width: 1000px) {
+  .quizHero { gap: 32px; }
+  .quizCard { gap: 25px; }
+  .quizHero h1 { font-size: 2.8rem; }
+  .callout { padding: 30px; }
+}
+@media (max-width: 760px) {
+  .main { padding: 25px 24px 48px; }
+  .pageHeader { flex-direction: column; align-items: flex-start; gap: 25px; margin-bottom: 32px; }
+  .pageHeader h1, .quizHero h1 { font-size: clamp(2.2rem, 7.5vw, 3rem); }
+  .lead { font-size: 14px; }
+  .projectGrid, .quizHero, .quizCard { grid-template-columns: 1fr; }
+  .projectGrid { gap: 24px; }
+  .projectBody { padding: 24px; }
+  .projectBody h2 { font-size: 23px; }
+  .projectImage { aspect-ratio: 16 / 11; }
+  .callout { margin-top: 50px; padding: 28px 24px; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .quizHero { padding-bottom: 0; gap: 0; min-height: auto; }
+  .diagnostic { padding: 25px; }
+  .quizSection { padding-top: 50px; }
+  .quizCard { padding: 25px; gap: 28px; }
+  .quizCard h3 { font-size: 21px; }
+  .quizActions { align-items: flex-start; }
+  .benefitGrid { grid-template-columns: 1fr; gap: 14px; }
+  .benefitCard { padding: 25px; }
+}
+@media (prefers-reduced-motion: reduce) { .projectCard:hover .projectImage img { transform: none; } }

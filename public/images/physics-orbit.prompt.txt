@@ -1,0 +1,6 @@
+Generated with the built-in image_gen tool for the BarbiDev landing page.
+Production asset: physics-orbit.webp (1024 x 1024).
+Source image: physics-orbit.png.
+
+Final prompt:
+Use case: stylized-concept. Asset type: square website hero image for BarbiDev, premium university physics and Python education. Create an exquisite futuristic scientific 3D sculpture: one large polished iridescent glass orbital torus with delicate luminous cyan and violet elliptical field lines intersecting it, a small radiant pearl at its core and a few floating chrome spheres. Elegant sculptural scientific instrument, beautiful and minimal, physically rendered glass and titanium, rich specular detail. Centered entire subject with generous breathing room and no cropped edges, 1024 square composition. Background uniform near black #07070B, soft violet and icy cyan rim lights, premium editorial technology aesthetic, high contrast. No text, no letters, no numbers, no logo, no watermark, no UI, no cards, no busy particles. Abstract scientific art, not a literal diagram.
