@@ -5,27 +5,27 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>BarbiDev | Estadística & Programación para tesis y proyectos</title>
+        <title>BarbiDev | Clases de física, estadística y programación</title>
         <meta
           name="description"
-          content="Asesoría en análisis estadístico y proyectos de programación para tesis, artículos e investigaciones en Ecuador. "
+          content="Clases de física universitaria online por Zoom en español. Asesoría en estadística y programación para tesis y proyectos. Ecuador. Cotiza por WhatsApp."
         />
-        <meta property="og:title" content="Estadística & Programación | BarbiDev " />
+        <meta property="og:title" content="Clases de física, estadística y programación | BarbiDev" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://barbi-dev.vercel.app" />
+        <meta property="og:url" content="https://barbidev.com/" />
         <meta
           property="og:description"
-          content="Asesoría en análisis estadístico y proyectos de programación para tesis, artículos e investigaciones en Ecuador."
+          content="Clases de física universitaria online en español y asesoría en estadística y programación desde Ecuador. Cotiza por WhatsApp."
         />
-        <meta property="og:image" content="https://barbi-dev.vercel.app/ogbd.jpg" />
+        <meta property="og:image" content="https://barbidev.com/ogbd.jpg" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="BarbiDev | Estadística & Programación" />
+        <meta name="twitter:title" content="BarbiDev | Clases de física, estadística y programación" />
         <meta
           name="twitter:description"
-          content="Asesoría para tesis e investigaciones. Análisis estadístico, Programación en Python y más."
+          content="Clases de física universitaria por Zoom en español. Estadística y programación para tesis y proyectos."
         />
-        <meta name="twitter:image" content="https://barbi-dev.vercel.app/ogbd.jpg" />
+        <meta name="twitter:image" content="https://barbidev.com/ogbd.jpg" />
 
       </Head>
 

@@ -7,7 +7,7 @@ type Lang = "es" | "en";
 type NavbarProps = {
   lang: Lang;
   setLang: React.Dispatch<React.SetStateAction<Lang>>;
-  currentPage?: "home" | "projects" | "questionnaires";
+  currentPage?: "home" | "projects" | "questionnaires" | "physics";
 };
 
 const copy = {
@@ -49,7 +49,7 @@ export default function Navbar({
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth > 920) setMenuOpen(false);
+      if (window.innerWidth > 1040) setMenuOpen(false);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -87,6 +87,9 @@ export default function Navbar({
 
         <div className={styles.navLinks}>
           <Link href={navHref.services}>{t.nav.services}</Link>
+          <Link href="/clases-de-fisica-online" aria-current={currentPage === "physics" ? "page" : undefined}>
+            {lang === "es" ? "Clases de física" : "Physics classes"}
+          </Link>
           <Link href={navHref.work}>{t.nav.work}</Link>
           <Link href={navHref.questionnaires}>{t.nav.questionnaires}</Link>
           <Link href={navHref.about}>{t.nav.about}</Link>
@@ -119,6 +122,9 @@ export default function Navbar({
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
         <Link href={navHref.services} onClick={() => setMenuOpen(false)}>
           {t.nav.services}
+        </Link>
+        <Link href="/clases-de-fisica-online" onClick={() => setMenuOpen(false)} aria-current={currentPage === "physics" ? "page" : undefined}>
+          {lang === "es" ? "Clases de física" : "Physics classes"}
         </Link>
         <Link href={navHref.work} onClick={() => setMenuOpen(false)}>
           {t.nav.work}

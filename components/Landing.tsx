@@ -20,7 +20,7 @@ const copy = {
       "Experta en análisis estadístico y programación en Python para tesis, artículos científicos e investigaciones.",
     promise:
       " ",
-    ctaPrimary: "Reservar consulta gratuita",
+    ctaPrimary: "Consultar por WhatsApp",
     ctaSecondary: "Ver Servicios",
     workTitle: "¿Como puedo asesorarte?",
     workIntro: " ",
@@ -76,7 +76,7 @@ const copy = {
       "I help you with statistical analysis and Python projects for theses, papers, and research.",
     promise:
       " ",
-    ctaPrimary: "Book a free consult",
+    ctaPrimary: "Contact on WhatsApp",
     ctaSecondary: "See Services",
     workTitle: "How can I assist you?",
     workIntro: " ",
@@ -132,7 +132,7 @@ export default function Landing() {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth > 920) setMenuOpen(false);
+      if (window.innerWidth > 1040) setMenuOpen(false);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -218,6 +218,7 @@ useEffect(() => {
           {/* Desktop links */}
           <div className={styles.navLinks}>
             <a href="#services1">{t.nav.services}</a>
+            <a href="/clases-de-fisica-online">{lang === "es" ? "Clases de física" : "Physics classes"}</a>
             <a href="/projects" rel="noopener noreferrer">{t.nav.work}</a>
             <a href="/cuestionarios">{t.nav.questionnaires}</a>
             <a href="#about">{t.nav.about}</a>
@@ -257,6 +258,7 @@ useEffect(() => {
         {/* Mobile dropdown */}
         <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
           <a href="#services1" onClick={() => setMenuOpen(false)}>{t.nav.services}</a>
+          <a href="/clases-de-fisica-online" onClick={() => setMenuOpen(false)}>{lang === "es" ? "Clases de física" : "Physics classes"}</a>
           <a href="/projects" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
           <a href="/cuestionarios" onClick={() => setMenuOpen(false)}>{t.nav.questionnaires}</a>
           <a href="#about" onClick={() => setMenuOpen(false)}>{t.nav.about}</a>
@@ -276,6 +278,9 @@ useEffect(() => {
             <p className={styles.subheadline}>{t.subheadline}</p>
 
             <div className={styles.ctas}>
+              <a className={`${styles.btn} ${styles.btnPrimary}`} href="/clases-de-fisica-online">
+                {lang === "es" ? "Clases de física universitaria online" : "Online university physics classes (Spanish)"}
+              </a>
               <a className={`${styles.btn} ${styles.btnPrimary}`} href={waGeneral} target="_blank" rel="noreferrer">
                 {t.ctaPrimary}
               </a>
@@ -299,6 +304,20 @@ useEffect(() => {
               </div>
             </div>
           </div>
+        </section>
+
+        <section className={`${styles.section} ${styles.anchor}`} aria-labelledby="physics-classes-title">
+          <h2 id="physics-classes-title" className={styles.h2}>
+            {lang === "es" ? "Clases de física online para universitarios" : "Online physics classes for university students"}
+          </h2>
+          <p className={styles.lead}>
+            {lang === "es"
+              ? "Para estudiantes de Física, Ingeniería y carreras afines. Física clásica, moderna y de las ondas, métodos matemáticos y métodos numéricos. Clases en español por Zoom, desde Ecuador."
+              : "For Physics, Engineering and related university degrees. Classical, modern and wave physics, mathematical and numerical methods. Lessons in Spanish via Zoom, from Ecuador."}
+          </p>
+          <a className={`${styles.btn} ${styles.btnPrimary}`} href="/clases-de-fisica-online">
+            {lang === "es" ? "Ver materias, horarios y reservar" : "View subjects, availability and booking"}
+          </a>
         </section>
 
         {/* Work routes */}

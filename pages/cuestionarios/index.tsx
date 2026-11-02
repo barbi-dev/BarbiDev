@@ -15,7 +15,7 @@ export default function CuestionariosPage() {
         <title>BarbiDev | Cuestionarios</title>
         <meta
           name="description"
-          content="Cuestionarios interactivos para diagnóstico académico, práctica guiada y preparación en matemática y razonamiento."
+          content="Cuestionarios interactivos para diagnóstico académico."
         />
       </Head>
 
@@ -58,8 +58,8 @@ export default function CuestionariosPage() {
 
                 <p className="sub">
                   {lang === "es"
-                    ? "Herramientas interactivas para detectar fortalezas, debilidades y necesidades de refuerzo en matemática, razonamiento y preparación académica."
-                    : "Interactive tools to detect strengths, weaknesses, and reinforcement needs in mathematics, reasoning, and academic preparation."}
+                    ? "Detecta fortalezas, debilidades y necesidades de refuerzo académico."
+                    : "Detect strengths, weaknesses, and reinforcement needs in academic preparation."}
                 </p>
 
                 <div className="ctaRow">
